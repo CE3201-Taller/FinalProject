@@ -18,7 +18,7 @@ module cond_check
 	always_comb
 		case(cond_i)
 			4'b0000: cond_o = zero;
-			4'b0001: cond_o = ~zero
+			4'b0001: cond_o = ~zero;
 			4'b0010: cond_o = carry;
 			4'b0011: cond_o = ~carry;
 			4'b0100: cond_o = neg;

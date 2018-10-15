@@ -14,8 +14,8 @@ module mux_four #(BITS = 3)
 );
 
 	logic[BITS-1:0] stage_1_1_out, stage_1_2_out;
-	mux #(BITS) stage_1_1(bus_a_i, bus_b_i, select_i[0], stage_1_1_out);
-	mux #(BITS) stage_1_2(bus_c_i, bus_d_i, select_i[0], stage_1_2_out);
-	mux #(BITS) stage_2_0(stage_1_1_out, stage_1_2_out, select_i[1], bus_o);
+	muX #(BITS) stage_1_1(bus_a_i, bus_b_i, select_i[0], stage_1_1_out);
+	muX #(BITS) stage_1_2(bus_c_i, bus_d_i, select_i[0], stage_1_2_out);
+	muX #(BITS) stage_2_0(stage_1_1_out, stage_1_2_out, select_i[1], bus_o);
 
 endmodule
