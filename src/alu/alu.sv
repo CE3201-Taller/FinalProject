@@ -11,8 +11,8 @@ module alu #(parameter BITS = 3)
 	 input logic [BITS-1:0] bus_a_i, bus_b_i,
 	 input logic [BITS:0]   control_i,
 	output logic [BITS-1:0] bus_s_o,
-	output logic [3:0]      flags_o);
-	
+	output logic [3:0]      flags_o
+);
 	logic[bits-1:0] addrL, notL, andL, orL, xorL, shiftRL, shiftLL;
 	or_gate  #(bits) opOr (bus_a_i, bus_b_i, orL);
 	and_gate #(bits) opAnd(bus_a_i, bus_b_i, andL);
