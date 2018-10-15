@@ -22,6 +22,11 @@
                   .write_data_o(write_data_o), 
                   .read_data_i(read_data));
     
-    instruction_memory imem(pc, instr);
-    data_memory dmem(clk_i, mem_write_o, data_adr_o, write_data_o, read_data);
+    instruction_memory imem(.a_i(pc), 
+                            .read_data_o(instr));
+    data_memory dmem(.clk_i(clk_i),
+                     .write_ena_i(mem_write_o),
+                     .a_i(data_adr_o),
+                     .write_data_i(write_data_o),
+                     .read_data_o(read_data));
 endmodule

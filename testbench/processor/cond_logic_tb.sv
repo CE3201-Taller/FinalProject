@@ -4,29 +4,31 @@
  * @file  cond_logic_tb.sv
  * @autor Victor Montero
  * @date  14/10/2018
+ * @fix   15/10/2018
+ * @autor Luis Arturo Mora
  * @src   Based on code found in Harris, D., & Harris, S. 
  *        Digital design and computer architecture. Elsevier. 2012.
  */
 
  
 module cond_logic_tb();
-	
-	logic clk_i,rst_i;
-	logic [3:0] cond_i; 
-   logic [3:0] alu_flags_i;
-   logic [1:0] flag_write_i;
-   logic       pcs_i, reg_write_i, mem_write_i;
-	logic       pcs_src_o, reg_write_o, mem_write_o;
-	
-	
-	cond_logic dut(clk_i,rst_i,
-						cond_i,
-						alu_flags_i,
-						flag_write_i,
-						pcs_i, reg_write_i, mem_write_i,
-						pcs_src_o, reg_write_o, mem_write_o);
-	
-	
+    logic       clk_i, rst_i;
+    logic [3:0] cond_i; 
+    logic [3:0] alu_flags_i;
+    logic [1:0] flag_write_i;
+    logic       pcs_i, reg_write_i, mem_write_i;
+    logic       pcs_src_o, reg_write_o, mem_write_o;
+    cond_logic dut(.clk_i(clk_i),
+                   .rst_i(rst_i),
+                   .cond_i(cond_i),
+                   .alu_flags_i(alu_flags_i),
+                   .flag_write_i(flag_write_i),
+                   .pcs_i(pcs_i), 
+                   .reg_write_i(reg_write_i), 
+                   .mem_write_i(mem_write_i),
+                   .pcs_src_o(pcs_src_o),
+                   .reg_write_o(reg_write_o),
+                   .mem_write_o(mem_write_o));
 	initial begin 
 		clk_i=1;
 		rst_i=1;

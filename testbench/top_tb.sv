@@ -2,6 +2,8 @@
  * @file  top_tb.sv
  * @autor Victor Montero
  * @date  14/10/2018
+ * @fix   15/10/2018
+ * @autor Luis Arturo Mora
  * @src   Based on code found in Harris, D., & Harris, S. 
  *        Digital design and computer architecture. Elsevier. 2012.
  */
@@ -19,10 +21,9 @@ module top_tb();
             .mem_write_o(mem_write));
             
     initial begin
-        #0  clk <= 0;
-        #0  rst <= 1;
-        #12 rst <= 0;
-        #50 $break;
+        #0 clk <= 0;
+        #0 rst <= 0;
+        #2 rst <= 1;
     end
     always begin
         #5 clk <= 1;
