@@ -1,3 +1,11 @@
+/* 
+ *
+ *
+ * @file  one_bit_half_adder.sv
+ * @autor Luis Arturo Mora Granados
+ * @date  14/09/2018
+ */
+
 module one_bit_half_adder
 	(input logic bit_a_i, bit_b_i,
 	output logic sum_o, carry_o);

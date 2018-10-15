@@ -1,3 +1,11 @@
+/* 
+ *
+ *
+ * @file  adder_substractor.sv
+ * @autor Luis Arturo Mora Granados
+ * @date  14/09/2018
+ */
+
 module adder_substractor #(parameter bits = 3)
 	(input logic[bits-1:0] bus_a_i, bus_b_i,
 	 input logic select_i,

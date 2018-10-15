@@ -1,3 +1,11 @@
+/* 
+ *
+ *
+ * @file  mux_eight.sv
+ * @autor Luis Arturo Mora Granados
+ * @date  14/09/2018
+ */
+
 module mux_eight #(BITS = 2)
 (
 	 input logic [BITS-1:0] bus_a_i, bus_b_i, bus_c_i, bus_d_i, 

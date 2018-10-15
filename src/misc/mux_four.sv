@@ -1,3 +1,11 @@
+/* 
+ *
+ *
+ * @file  mux_four.sv
+ * @autor Luis Arturo Mora Granados
+ * @date  14/09/2018
+ */
+
 module mux_four #(BITS = 3)
 (
 	input  logic [BITS-1:0] bus_a_i, bus_b_i, bus_c_i, bus_d_i,
