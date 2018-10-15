@@ -37,6 +37,7 @@ module cond_logic
     cond_check cc(cond_i, flags, cond);
     
     assign flag_write  = flag_write_i & {2{cond}};
-    assign mem_write_o = mem_write_i  & cond;
+    assign reg_write_o = reg_write_i & cond;
+    assign mem_write_o = mem_write_i & cond;
     assign pc_src_o    = pcs_i & cond;
 endmodule

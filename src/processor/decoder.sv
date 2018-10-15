@@ -22,7 +22,7 @@ module decoder
     // Main Decoder
     always_comb
         casex(op_i)
-            2'b01: if(funct_i[5]) controls = 10'b0000101001;
+            2'b00: if(funct_i[5]) controls = 10'b0000101001;
                else               controls = 10'b0000001001;
             2'b01: if(funct_i[0]) controls = 10'b0001111000;
                else               controls = 10'b1001110100; 
