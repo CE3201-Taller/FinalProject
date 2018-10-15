@@ -1,8 +1,9 @@
-module alu #(parameter bits = 3)
-	(input logic[bits-1:0] bus_a_i, bus_b_i,
-	 input logic[2:0] control_i,
-	output logic[bits-1:0] bus_s_o,
-	output logic flag_c_o, flag_n_o, flag_v_o, flag_z_o);
+module alu #(parameter BITS = 3)
+(
+	 input logic [BITS-1:0] bus_a_i, bus_b_i,
+	 input logic [BITS:0]   control_i,
+	output logic [BITS-1:0] bus_s_o,
+	output logic            flag_c_o, flag_n_o, flag_v_o, flag_z_o);
 	
 	logic[bits-1:0] addrL, notL, andL, orL, xorL, shiftRL, shiftLL;
 	or_gate  #(bits) opOr (bus_a_i, bus_b_i, orL);
@@ -13,4 +14,5 @@ module alu #(parameter bits = 3)
 	shift_left_gate   #(bits) opShiftL(bus_a_i, bus_b_i, shiftLL);
 	shift_right_gate  #(bits) opShiftR(bus_a_i, bus_b_i, shiftRL);
 	mux_eight #(bits) opSelector(addrL, addrL, shiftLL, shiftRL, orL,   andL , xorL,    notL, control_i, bus_s_o);
+	
 endmodule
