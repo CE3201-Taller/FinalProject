@@ -16,7 +16,8 @@ module decoder
     output logic [1:0] flag_write_o,
     output logic       pcs_o, reg_write_o, mem_write_o,
     output logic       mem_to_reg_o, alu_src_o,
-    output logic [1:0] imm_src_o, reg_src_o, alu_control_o);
+    output logic [1:0] imm_src_o, reg_src_o,
+    output logic [2:0] alu_control_o);
 
     logic [9:0] controls;
     logic branch, alu_op;

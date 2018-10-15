@@ -18,7 +18,7 @@ module datapath
      input logic [2:0]  alu_control_i,
      input logic        mem_to_reg_i, 
      input logic        pc_src_i,
-    output logic [31:0] alu_flags_o,
+    output logic [3:0]  alu_flags_o,
     output logic [31:0] pc_o,
      input logic [31:0] instr_i,
     output logic [31:0] alu_result_o, write_data_o,
@@ -27,23 +27,28 @@ module datapath
     logic [31:0] pc_next, pc_plus_4, pc_plus_8;
     logic [31:0] imm, src_a, src_b, result;
     logic [3:0]  read_addr_1, read_addr_2;
+    logic flag_v_add_1, flag_v_add_2;
     
     // Next PC logic
+    mux2      #(32) pcmux (.bus_a_i(pc_plus_4),
+                           .bus_b_i(result),
+                           .select_i(pc_src_i),
+                           .bus_o(pc_next));
     flip_flop #(32)  pcreg(.clk_i(clk_i),
                            .rst_i(rst_i),
                            .ena_i(1'b1),
                            .d_i(pc_next),
                            .q_o(pc_o));
-    mux2      #(32) pcmux (.bus_a_i(pc_plus_4),
-                           .bus_b_i(result),
-                           .select_i(pc_src_i),
-                           .bus_o(pc_next));
-    adder     #(32) pcadd1(.bus_a_i(pc_o), 
-                           .bus_b_i(32'b100),
-                           .bus_o(pc_plus_4));
-    adder     #(32) pcadd2(.bus_a_i(pc_plus_4),
-                           .bus_b_i(32'b100),
-                           .bus_o(pc_plus_8));
+    adder_substractor #(32) pcadd1(.bus_a_i(pc_o), 
+                                   .bus_b_i(32'b100),
+                                   .select_i(1'b1),
+                                   .bus_o(pc_plus_4),
+                                   .flag_v_o(flag_v_add_1));
+    adder_substractor #(32) pcadd2(.bus_a_i(pc_plus_4),
+                                   .bus_b_i(32'b100),
+                                   .select_i(1'b1),
+                                   .bus_o(pc_plus_8),
+                                   .flag_v_o(flag_v_add_2));
     
     // Register file logic
     mux2 #(4) ra1mux(.bus_a_i(instr_i[19:16]),
@@ -75,9 +80,9 @@ module datapath
                        .bus_b_i(imm),
                        .select_i(alu_src_i),
                        .bus_o(src_b));
-    alu  #(3) alu_f(.bus_a_i(src_a),
-                    .bus_b_i(src_b),
-                    .control_i(alu_control_i),
-                    .bus_s_o(alu_result_o),
-                    .flags_o(alu_flags_o));
+    alu  #(32) alu_f(.bus_a_i(src_a),
+                     .bus_b_i(src_b),
+                     .control_i(alu_control_i),
+                     .bus_s_o(alu_result_o),
+                     .flags_o(alu_flags_o));
 endmodule

@@ -17,10 +17,10 @@ module processor
     output logic [31:0] alu_result_o, write_data_o,
      input logic [31:0] read_data_i
 );
-
     logic [3:0] alu_flags;
     logic       reg_write, alu_src, mem_to_reg, pc_src;
-    logic [1:0] reg_src, imm_src, alu_control;
+    logic [1:0] reg_src, imm_src;
+    logic [2:0] alu_control;
 
     // =========================== Controller ===========================
     controller c(.clk_i(clk_i),
