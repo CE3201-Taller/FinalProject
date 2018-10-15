@@ -9,13 +9,13 @@
  module top 
  (
      input logic clk_i, rst_i,
-    output logic [31:0] write_data_o, dat_address_o,
+    output logic [31:0] write_data_o, data_address_o,
     output logic mem_write_o
 );
     logic [31:0] pc,instr, read_data;
     processor arm(clk_i, rst_i, pc, instr, mem_write_o,
-                  dat_address_o, write_data_o, read_data) ;
+                  data_address_o, write_data_o, read_data) ;
     
     imem imem(pc, instr);
-    dmem dmem(clk_i, mem_write_o, dat_address_o, write_data_o, read_data);
+    dmem dmem(clk_i, mem_write_o, data_address_o, write_data_o, read_data);
 endmodule

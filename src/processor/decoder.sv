@@ -35,7 +35,7 @@ module decoder
 
     always_comb
         if(alu_op) begin
-            case(funct_i[4:1])
+            casex(funct_i[4:1])
                 4'b0100: alu_control_o = 2'b00; // ADD
                 4'b0010: alu_control_o = 2'b01; // SUB
                 4'b0000: alu_control_o = 2'b10; // AND

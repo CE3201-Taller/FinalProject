@@ -9,25 +9,31 @@
  
  module top_tb();
 
-    logic clk_i, rst_i;
-    logic [31:0] write_data_o,dat_address_o;
-    logic mem_write_o;
+    logic clk, rst;
+    logic [31:0] write_data, data_address;
+    logic mem_write;
     
-    top dut(	clk_i,rst_i,
-                write_data_o,dat_address_o,
-                mem_write_o);
+    top dut(.clk_i(clk),
+            .rst_i(rst),
+            .write_data_o(write_data),
+            .data_address_o(data_address),
+            .mem_write_o(mem_write));
     initial begin
-        #0  rst_i <= 1;
-        #22 rst_i <= 0;
+        #0  rst <= 1;
+        #22 rst <= 0;
     end
     always begin
-        #5 clk_i <= 1;
-        #5 clk_i <= 0;
+        #5 clk <= 1;
+        #5 clk <= 0;
     end
-    always @(negedge clk_i) begin
-        if (mem_write_o) begin
-            if (dat_address_o === 100 & write_data_o ===7) begin
+    always @(negedge clk) begin
+        if (mem_write) begin
+            if (data_address === 100 & write_data === 7) begin
                 $display("Simulation succeded");
+                $stop;
+            end
+            else if (data_address !== 96) begin
+                $display("Simulation failed");
                 $stop;
             end
         end
