@@ -4,6 +4,8 @@
  * @file  alu.sv
  * @autor Luis Arturo Mora Granados
  * @date  14/10/2018
+ * @src   Based on code found in Harris, D., & Harris, S. 
+ *        Digital design and computer architecture. Elsevier. 2012.
  */
 
 module alu #(parameter BITS = 3)

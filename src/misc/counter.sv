@@ -5,6 +5,8 @@
  * @file  counter.sv
  * @autor Luis Arturo Mora Granados
  * @date  20/09/2018
+ * @src   Based on code found in Harris, D., & Harris, S. 
+ *        Digital design and computer architecture. Elsevier. 2012.
  */
 
 module counter #(parameter N = 8)

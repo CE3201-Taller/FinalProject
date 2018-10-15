@@ -4,6 +4,8 @@
  * @file  cond_logic_tb.sv
  * @autor Victor Montero
  * @date  14/10/2018
+ * @src   Based on code found in Harris, D., & Harris, S. 
+ *        Digital design and computer architecture. Elsevier. 2012.
  */
 
  

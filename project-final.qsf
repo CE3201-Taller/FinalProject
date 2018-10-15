@@ -66,8 +66,8 @@ set_global_assignment -name SYSTEMVERILOG_FILE src/misc/mux_four.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/misc/mux_eight.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/misc/flip_flop.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/misc/counter.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/memory/imem.sv
-set_global_assignment -name SYSTEMVERILOG_FILE src/memory/dmem.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/memory/instruction_memory.sv
+set_global_assignment -name SYSTEMVERILOG_FILE src/memory/data_memory.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/alu/shift_right_gate.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/alu/shif_left_gate.sv
 set_global_assignment -name SYSTEMVERILOG_FILE src/alu/one_bit_half_adder.sv

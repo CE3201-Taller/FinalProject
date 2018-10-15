@@ -4,8 +4,7 @@
 # But not these files...
 !.gitignore
 
-!/src/memfile.dat
-!/src/memory/memfile.dat
+!*/src/memory/memfile.dat
 # ...even if they are in subdirectories
 !/project-final.qpf
 !/project-final.qsf

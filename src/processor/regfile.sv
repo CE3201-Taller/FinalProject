@@ -3,8 +3,9 @@
  *
  * @file  regfile.sv
  * @autor Néstor Baltodano Durán
- * @Based on code found in Harris, D., & Harris, S. Digital design and computer architecture. Elsevier. 2012.
  * @date  14/10/2018
+ * @src   Based on code found in Harris, D., & Harris, S. 
+ *        Digital design and computer architecture. Elsevier. 2012.
  */
 
 module regfile

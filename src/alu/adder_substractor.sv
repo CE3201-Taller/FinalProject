@@ -4,6 +4,8 @@
  * @file  adder_substractor.sv
  * @autor Luis Arturo Mora Granados
  * @date  14/09/2018
+ * @src   Based on code found in Harris, D., & Harris, S. 
+ *        Digital design and computer architecture. Elsevier. 2012.
  */
 
 module adder_substractor #(parameter BITS = 3)
