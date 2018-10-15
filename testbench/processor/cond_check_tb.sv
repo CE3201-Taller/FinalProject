@@ -1,6 +1,4 @@
 /* 
- *
- *
  * @file  cond_check_tb.sv
  * @autor Néstor Baltodano Durán
  * @date  14/10/2018
