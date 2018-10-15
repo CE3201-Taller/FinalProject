@@ -9,23 +9,29 @@
 module cond_logic
 (
      input logic       clk_i, rst_i,
-     input logic [3:0] cond_i, alu_flags_i,
+     input logic [3:0] cond_i, 
+     input logic [3:0] alu_flags_i,
      input logic [1:0] flag_write_i,
      input logic       pcs_i, reg_write_i, mem_write_i,
     output logic       pcs_src_o, reg_write_o, mem_write_o
 );
-
     logic [1:0] flag_write;
     logic [3:0] flags;
-    logic cond;
+    logic       cond;
 
     // =========================== Flip Flop1 ===========================
-    flopenr #(2) flagreg1(clk_i, rst_i, flag_write[1],
-                          alu_flags_i[3:2], flags[3:2]);
+    flip_flop #(2) flagreg1(.clk_i(clk_i), 
+                            .rst_i(rst_i), 
+                            .ena_i(flag_write[1]),
+                            .d_i(alu_flags_i[3:2]), 
+                            .q_o(flags[3:2]));
 
     // =========================== Flip Flop2 ===========================
-    flopenr #(2) flagreg0(clk_i, rst_i, flag_write[0],
-                          alu_flags_i[1:0], flags[1:0]);
+    flip_flop #(2) flagreg0(.clk_i(clk_i), 
+                            .rst_i(rst_i), 
+                            .ena_i(flag_write[0]),
+                            .d_i(alu_flags_i[1:0]), 
+                            .q_o(flags[1:0]));
 
     // =========================== Cond Check ===========================
     condcheck cc(cond_i, flags, cond);
