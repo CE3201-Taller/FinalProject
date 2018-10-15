@@ -4,7 +4,10 @@
 # But not these files...
 !.gitignore
 
+
 # ...even if they are in subdirectories
+!/project-final.qpf
+!/project-final.qsf
 !*/
 !*/src
 !*/testbench
