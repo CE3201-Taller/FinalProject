@@ -12,7 +12,5 @@ module alu #(parameter bits = 3)
 	adder_substractor #(bits) opSum(bus_a_i, bus_b_i, control_i[0], addrL, flag_v_o);
 	shift_left_gate   #(bits) opShiftL(bus_a_i, bus_b_i, shiftLL);
 	shift_right_gate  #(bits) opShiftR(bus_a_i, bus_b_i, shiftRL);
-	mux_eight #(bits) opSelector(addrL, addrL, shiftLL, shiftRL, orL,   andL , xorL,    notL, 
-										  control_i,
-										  bus_s_o);
+	mux_eight #(bits) opSelector(addrL, addrL, shiftLL, shiftRL, orL,   andL , xorL,    notL, control_i, bus_s_o);
 endmodule
