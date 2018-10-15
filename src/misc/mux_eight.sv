@@ -18,6 +18,6 @@ module mux_eight #(BITS = 2)
 	                           bus_d_i, select_i[1:0], stage_1_1_out);
 	mux_four #(BITS) stage_1_2(bus_e_i, bus_f_i, bus_g_i, 
 	                           bus_h_i, select_i[1:0], stage_1_2_out);
-	mux #(BITS)      stage_2(stage_1_1_out, stage_1_2_out, select_i[2], bus_o);
+	muX #(BITS)      stage_2_0(stage_1_1_out, stage_1_2_out, select_i[2], bus_o);
 	
 endmodule

@@ -9,7 +9,7 @@
 
 module counter #(parameter N = 8)
 (
-     input logic         clk_i, rst_i, ena_i
+     input logic         clk_i, rst_i, ena_i,
     output logic [N-1:0] q_o
 );
     always_ff @(posedge clk_i, posedge rst_i)

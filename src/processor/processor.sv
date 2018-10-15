@@ -41,7 +41,7 @@ module processor
                 .reg_write_i(reg_write),
                 .imm_src_i(imm_src),
                 .alu_src_i(alu_src),
-                .alu_control_o(alu_control),
+                .alu_control_i(alu_control),
                 .mem_to_reg_i(mem_to_reg),
                 .pc_src_i(pc_src),
                 .alu_flags_o(alu_flags),
