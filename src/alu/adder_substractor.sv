@@ -17,7 +17,14 @@ module adder_substractor #(parameter BITS = 3)
 );
     
     logic[BITS-1:0] bus_tmp, selected;
-    assign selected = ~select_i;
-    xor_gate #(BITS) detectOp(bus_b_i, selected, bus_tmp);
-    adder #(BITS)    adderSubstractor(bus_a_i, bus_tmp, select_i, bus_o, flag_v_o); 
+    xor_gate #(BITS) oper(.bus_a_i(bus_b_i),
+                          .bus_b_i(selected), 
+                          .bus_s_o(bus_tmp));
+                          
+    adder    #(BITS) addr(.bus_a_i(bus_a_i),
+                          .bus_b_i(bus_tmp),
+                          .carry_i(select_i),
+                          .bus_o(bus_o),
+                          .flag_v_o(flag_v_o));
+    assign selected = ~(~select_i);
 endmodule

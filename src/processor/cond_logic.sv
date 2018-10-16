@@ -36,7 +36,9 @@ module cond_logic
                             .q_o(flags[1:0]));
 
     // =========================== Cond Check ===========================
-    cond_check cc(cond_i, flags, cond);
+    cond_check cc(.cond_i(cond_i),
+                  .flags_i(flags),
+                  .cond_o(cond));
     
     assign flag_write  = flag_write_i & {2{cond}};
     assign reg_write_o = reg_write_i & cond;

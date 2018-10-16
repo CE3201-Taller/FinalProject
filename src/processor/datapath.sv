@@ -15,7 +15,7 @@ module datapath
      input logic        reg_write_i,
      input logic [1:0]  imm_src_i,
      input logic        alu_src_i,
-     input logic [2:0]  alu_control_i,
+     input logic [1:0]  alu_control_i,
      input logic        mem_to_reg_i, 
      input logic        pc_src_i,
     output logic [3:0]  alu_flags_o,
@@ -30,7 +30,7 @@ module datapath
     logic flag_v_add_1, flag_v_add_2;
     
     // Next PC logic
-    mux2      #(32) pcmux (.bus_a_i(pc_plus_4),
+    mux2      #(32)  pcmux(.bus_a_i(pc_plus_4),
                            .bus_b_i(result),
                            .select_i(pc_src_i),
                            .bus_o(pc_next));
@@ -41,12 +41,12 @@ module datapath
                            .q_o(pc_o));
     adder_substractor #(32) pcadd1(.bus_a_i(pc_o), 
                                    .bus_b_i(32'b100),
-                                   .select_i(1'b1),
+                                   .select_i(1'b0),
                                    .bus_o(pc_plus_4),
                                    .flag_v_o(flag_v_add_1));
     adder_substractor #(32) pcadd2(.bus_a_i(pc_plus_4),
                                    .bus_b_i(32'b100),
-                                   .select_i(1'b1),
+                                   .select_i(1'b0),
                                    .bus_o(pc_plus_8),
                                    .flag_v_o(flag_v_add_2));
     
@@ -75,11 +75,7 @@ module datapath
     extend    ext   (.instr_i(instr_i[23:0]),
                      .imm_src_i(imm_src_i),
                      .imm_o(imm));
-    // ALU logic
-    mux2 #(32) srcbmux(.bus_a_i(write_data_o),
-                       .bus_b_i(imm),
-                       .select_i(alu_src_i),
-                       .bus_o(src_b));
+    // ALU logic       
     alu  #(32) alu_f(.bus_a_i(src_a),
                      .bus_b_i(src_b),
                      .control_i(alu_control_i),

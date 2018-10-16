@@ -17,7 +17,7 @@ module controller
     output logic         reg_write_o,
     output logic [1:0]   imm_src_o,
     output logic         alu_src_o,
-    output logic [2:0]   alu_control_o,
+    output logic [1:0]   alu_control_o,
     output logic         mem_write_o, mem_to_reg_o, 
     output logic         pc_src_o
 );

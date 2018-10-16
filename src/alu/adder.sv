@@ -13,11 +13,11 @@ module adder #(parameter BITS = 3)
      input logic[BITS-1:0] bus_a_i, bus_b_i,
      input logic           carry_i,
     output logic[BITS-1:0] bus_o,
-    output logic           flag_overflow_o
+    output logic           flag_v_o
 );
     logic[BITS:0] carry_o;
     assign carry_o[0] = carry_i;
-    assign flag_overflow_o = carry_o[BITS];
+    assign flag_v_o = carry_o[BITS];
     genvar i;
     generate 
         for (i = 0; i < BITS; i = i+1) begin:forloop

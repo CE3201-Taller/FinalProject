@@ -23,7 +23,7 @@ module top_tb();
     initial begin
         #0 clk <= 0;
         #0 rst <= 0;
-        #2 rst <= 1;
+        #22 rst <= 1;
     end
     always begin
         #5 clk <= 1;
