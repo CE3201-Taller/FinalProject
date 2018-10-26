@@ -15,7 +15,7 @@ module alu #(parameter WIDTH = 3)
     output logic [WIDTH-1:0] bus_s_o,
     output logic [3:0]       flags_o
 );
-    logic[WIDTH-1:0] addr_l, and_l, orr_l, zero_tmp;
+    logic[WIDTH-1:0] addr_l, and_l, orr_l;
     logic flag_z, flag_v, flag_n, flag_c;
     adder_substractor #(WIDTH) adder_sub(.bus_a_i(bus_a_i), 
                                          .bus_b_i(bus_b_i), 
@@ -35,8 +35,7 @@ module alu #(parameter WIDTH = 3)
                                  .select_i(control_i),
                                  .bus_o(bus_s_o));
     always_comb begin
-        zero_tmp = 32'd4294967295;
-        flag_z   = zero_tmp & ~bus_s_o;
+        flag_z   = & (~bus_s_o);
         flag_c   = 1'b0;
         flag_n   = bus_s_o[31]; 
         flags_o[0] = flag_z;
