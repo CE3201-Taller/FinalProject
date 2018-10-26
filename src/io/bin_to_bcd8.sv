@@ -31,7 +31,7 @@
 	add3 m6(d6,c6);
 	add3 m7(d7,c7);
 	
-	assign unit_o = {c5[2:0],A[0]};
+	assign unit_o = {c5[2:0],A_i[0]};
 	assign tens_o = {c7[2:0],c5[3]};
 	assign hundreds_o = {c6[3],c7[3]};
 	

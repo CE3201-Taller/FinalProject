@@ -43,4 +43,14 @@
                        .display_1_o(display_1_o),
                        .display_2_o(display_2_o),
                        .display_3_o(display_3_o));
+							  
+	 input_controller ic(.clk_i(clk_i),
+								.mode_i(mode_i),
+								.data_i(data_i),
+								.funct_1_i(funct_1_i),
+								.funct_2_i(funct_2_i),
+								.exec_i(exec_i),
+								.w_ena_o(w2_ena),
+								.w_data_o(w2_data), 
+								.w_addr_o(addr_2));
 endmodule

@@ -6,7 +6,7 @@
 
 module input_controller
 (
-     input logic        clk_i, rst_i,
+     input logic        clk_i,
      input logic        mode_i,
      input logic [8:0]  data_i,
      input logic        funct_1_i, funct_2_i, exec_i,
