@@ -9,7 +9,7 @@
  module top 
  (
      input logic        clk_i, rst_i,
-    output logic [31:0] data_adr_o, write_data_o,
+    output logic [31:0] write_data_o, data_addr_o,
     output logic        mem_write_o
 );
     logic [31:0] pc, instr, read_data;
@@ -18,7 +18,7 @@
                   .pc_o(pc), 
                   .instr_i(instr), 
                   .mem_write_o(mem_write_o),
-                  .alu_result_o(data_adr_o), 
+                  .alu_result_o(data_addr_o), 
                   .write_data_o(write_data_o), 
                   .read_data_i(read_data));
     
@@ -26,7 +26,7 @@
                             .read_data_o(instr));
     data_memory dmem(.clk_i(clk_i),
                      .write_ena_i(mem_write_o),
-                     .a_i(data_adr_o),
+                     .a_i(data_addr_o),
                      .write_data_i(write_data_o),
                      .read_data_o(read_data));
 endmodule

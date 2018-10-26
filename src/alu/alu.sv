@@ -8,32 +8,32 @@
  *        Digital design and computer architecture. Elsevier. 2012.
  */
 
-module alu #(parameter BITS = 3)
+module alu #(parameter WIDTH = 3)
 (
-     input logic [BITS-1:0] bus_a_i, bus_b_i,
-     input logic [1:0]      control_i,
-    output logic [BITS-1:0] bus_s_o,
-    output logic [3:0]      flags_o
+     input logic [WIDTH-1:0] bus_a_i, bus_b_i,
+     input logic [1:0]       control_i,
+    output logic [WIDTH-1:0] bus_s_o,
+    output logic [3:0]       flags_o
 );
-    logic[BITS-1:0] addr_l, shift_ll, shift_rl;
+    logic[WIDTH-1:0] addr_l, and_l, or_l;
     logic flag_o, flag_v, flag_n, flag_c;
-    adder_substractor #(BITS) adder_sub(.bus_a_i(bus_a_i), 
-                                        .bus_b_i(bus_b_i), 
-                                        .select_i(control_i[0]), 
-                                        .bus_o(addr_l), 
-                                        .flag_v_o(flag_v));
-    shift_left_gate #(BITS)   shift_ll_op(bus_a_i,
-                                          bus_b_i,
-                                          shift_ll);
-    shift_right_gate #(BITS)  shift_rl_op(bus_a_i,
-                                          bus_b_i,
-                                          shift_rl);
-    mux_four #(BITS) opSelector(.bus_a_i(addr_l), 
-                                .bus_b_i(addr_l), 
-                                .bus_c_i(shift_ll), 
-                                .bus_d_i(shift_rl),
-                                .select_i(control_i),
-                                .bus_o(bus_s_o));
+    adder_substractor #(WIDTH) adder_sub(.bus_a_i(bus_a_i), 
+                                         .bus_b_i(bus_b_i), 
+                                         .select_i(control_i[0]), 
+                                         .bus_o(addr_l), 
+                                         .flag_v_o(flag_v));
+    and_gate #(WIDTH) and_op(bus_a_i,
+                             bus_b_i,
+                             and_l);
+     or_gate #(WIDTH)  or_op(bus_a_i,
+                             bus_b_i,
+                             orr_l);
+    mux_four #(WIDTH) opSelector(.bus_a_i(addr_l), 
+                                 .bus_b_i(addr_l), 
+                                 .bus_c_i(and_l), 
+                                 .bus_d_i(orr_l),
+                                 .select_i(control_i),
+                                 .bus_o(bus_s_o));
     always_comb begin
         flag_o  = 1'b0;
         flag_c  = 1'b0;

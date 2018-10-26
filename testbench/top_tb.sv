@@ -16,14 +16,14 @@ module top_tb();
     
     top dut(.clk_i(clk),
             .rst_i(rst),
-            .data_adr_o(data_adr),
+            .data_addr_o(data_adr),
             .write_data_o(write_data),
             .mem_write_o(mem_write));
             
     initial begin
-        #0 clk <= 0;
-        #0 rst <= 0;
-        #22 rst <= 1;
+        #0 clk  <= 0;
+        #0 rst  <= 1;
+        #10 rst <= 0;
     end
     always begin
         #5 clk <= 1;
@@ -31,10 +31,10 @@ module top_tb();
     end
     always_ff @(negedge clk) begin
         if (mem_write) begin
-            if (data_adr == 100 & write_data == 7) begin
+            if (data_adr === 100 & write_data === 7) begin
                 $display("Simulation succeded");
             end
-            else if (data_adr != 96) begin
+            else if (data_adr !== 96) begin
                 $display("Simulation failed");
                 $fatal;
             end

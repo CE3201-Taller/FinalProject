@@ -14,12 +14,12 @@ module cond_logic
      input logic [3:0] cond_i, 
      input logic [3:0] alu_flags_i,
      input logic [1:0] flag_write_i,
-     input logic       pcs_i, reg_write_i, mem_write_i,
+     input logic       pc_src_i, reg_write_i, mem_write_i,
     output logic       pc_src_o, reg_write_o, mem_write_o
 );
     logic [1:0] flag_write;
     logic [3:0] flags;
-    logic       cond;
+    logic       cond_ex;
 
     // =========================== Flip Flop1 ===========================
     flip_flop #(2) flagreg1(.clk_i(clk_i), 
@@ -38,10 +38,10 @@ module cond_logic
     // =========================== Cond Check ===========================
     cond_check cc(.cond_i(cond_i),
                   .flags_i(flags),
-                  .cond_o(cond));
+                  .cond_o(cond_ex));
     
-    assign flag_write  = flag_write_i & {2{cond}};
-    assign reg_write_o = reg_write_i & cond;
-    assign mem_write_o = mem_write_i & cond;
-    assign pc_src_o    = pcs_i & cond;
+    assign flag_write  = flag_write_i & {2{cond_ex}};
+    assign reg_write_o = reg_write_i & cond_ex;
+    assign mem_write_o = mem_write_i & cond_ex;
+    assign pc_src_o    = pc_src_i    & cond_ex;
 endmodule

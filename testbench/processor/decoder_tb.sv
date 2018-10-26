@@ -2,6 +2,7 @@
  * @file  cond_check_tb.sv
  * @autor Néstor Baltodano Durán
  * @date  14/10/2018
+ * @fix   25/10/2018
  */
  
  module decoder_tb();
@@ -10,7 +11,7 @@
 	logic [3:0] read_data;
 	logic pcs, reg_write, mem_write, mem_to_reg, alu_src, clk;
 	
-	decoder dut(op, funct, read_data, flag_write, pcs, reg_write, mem_write, mem_to_reg, alu_src, imn_src, reg_src, alu_control);
+	decoder dut(op, funct, read_data, flag_write, pcs, reg_write, mem_write, mem_to_reg, alu_src, imm_src, reg_src, alu_control);
 	
 	initial begin
 	clk = 0;

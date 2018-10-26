@@ -14,7 +14,7 @@ module decoder
      input logic [5:0] funct_i,
      input logic [3:0] read_data_i,
     output logic [1:0] flag_write_o,
-    output logic       pcs_o, reg_write_o, mem_write_o,
+    output logic       pc_src_o, reg_write_o, mem_write_o,
     output logic       mem_to_reg_o, alu_src_o,
     output logic [1:0] imm_src_o, reg_src_o, alu_control_o);
 
@@ -24,17 +24,11 @@ module decoder
     // Main Decoder
     always_comb
         casex(op_i)
-            // Data-processing immediate
             2'b00: if(funct_i[5]) controls = 10'b0000101001;
-            // Data-processing immediate
                    else           controls = 10'b0000001001;
-            // LDR
             2'b01: if(funct_i[0]) controls = 10'b0001111000;
-            // STR
                    else           controls = 10'b1001110100;
-            // B
             2'b10:                controls = 10'b0110100010;
-            // unimplemented
             default:              controls = 10'bx;
     endcase
 
@@ -48,15 +42,15 @@ module decoder
                 4'b0010: alu_control_o = 2'b01; // SUB
                 4'b0000: alu_control_o = 2'b10; // MUL
                 4'b1100: alu_control_o = 2'b11; // DIV
-                default: alu_control_o = 2'bx;
+                default: alu_control_o = 2'bx;  // unimplemented
             endcase
             flag_write_o[1] = funct_i[0];
-            flag_write_o[0] = funct_i[0] & (alu_control_o == 2'b00 | 
-                                            alu_control_o == 2'b01);
+            flag_write_o[0] = funct_i[0] & 
+                              (alu_control_o == 2'b00 | alu_control_o == 2'b01);
         end 
         else begin
             alu_control_o = 2'b00;
             flag_write_o  = 2'b00;
         end
-    assign pcs_o = ((read_data_i == 4'b1111) & reg_write_o) | branch;
+    assign pc_src_o = ((read_data_i == 4'b1111) & reg_write_o) | branch;
 endmodule

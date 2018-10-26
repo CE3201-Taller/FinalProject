@@ -14,42 +14,26 @@ module cond_check
      input logic [3:0] flags_i,
     output logic       cond_o
 );
-    logic neg, zero, carryy, overflow, ge;
-    assign {neg, zero, carryy, overflow} = flags_i;
-    assign ge = (neg == overflow);
+    logic neg_flag, zero_flag, carry_flag, overflow_flag, ge_flag;
+    assign {neg_flag, zero_flag, carry_flag, overflow_flag} = flags_i;
+    assign ge_flag = (neg_flag == overflow_flag);
     always_comb
         case(cond_i)
-            // EQ
-            4'b0000: cond_o = zero;
-            // NE
-            4'b0001: cond_o = ~zero;
-            // CS
-            4'b0010: cond_o = carryy;
-            // CC
-            4'b0011: cond_o = ~carryy;
-            // MI
-            4'b0100: cond_o = neg;
-            // PL
-            4'b0101: cond_o = ~neg;
-            // VS
-            4'b0110: cond_o = overflow;
-            // VC
-            4'b0111: cond_o = ~overflow;+
-            // HI
-            4'b1000: cond_o = carryy & ~zero;
-            // LS
-            4'b1001: cond_o = ~(carryy & zero);
-            // GE
-            4'b1010: cond_o = ge;
-            // LT
-            4'b1011: cond_o = ~ge;
-            // GT
-            4'b1100: cond_o = ~zero & ge;
-            // LE
-            4'b1101: cond_o = ~(~zero & ge);
-            // Always
-            4'b1110: cond_o = 1'b1;
-            // undefined
-            default: cond_o = 1'bx;
+            4'b0000: cond_o =    zero_flag;
+            4'b0001: cond_o = ~  zero_flag;
+            4'b0010: cond_o =    carry_flag;
+            4'b0011: cond_o = ~  carry_flag;
+            4'b0100: cond_o =    neg_flag;
+            4'b0101: cond_o = ~  neg_flag;
+            4'b0110: cond_o =    overflow_flag;
+            4'b0111: cond_o = ~  overflow_flag;
+            4'b1000: cond_o =    carry_flag & ~zero_flag;
+            4'b1001: cond_o = ~ (carry_flag & ~zero_flag);
+            4'b1010: cond_o =    ge_flag;
+            4'b1011: cond_o = ~  ge_flag;
+            4'b1100: cond_o =    ~zero_flag & ge_flag;
+            4'b1101: cond_o = ~ (~zero_flag & ge_flag);
+            4'b1110: cond_o =    1'b1;
+            default: cond_o =    1'bx;
         endcase
 endmodule

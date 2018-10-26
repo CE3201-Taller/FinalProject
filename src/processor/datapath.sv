@@ -25,9 +25,9 @@ module datapath
      input logic [31:0] read_data_i
 );
     logic [31:0] pc_next, pc_plus_4, pc_plus_8;
-    logic [31:0] imm, src_a, src_b, result;
+    logic [31:0] ext_imm, src_a, src_b, result;
     logic [3:0]  read_addr_1, read_addr_2;
-    logic flag_v_add_1, flag_v_add_2;
+    logic        flag_v_add_1, flag_v_add_2;
     
     // Next PC logic
     mux2      #(32)  pcmux(.bus_a_i(pc_plus_4),
@@ -58,8 +58,8 @@ module datapath
     mux2 #(4) ra2mux(.bus_a_i(instr_i[3:0]), 
                      .bus_b_i(instr_i[15:12]),
                      .select_i(reg_src_i[1]),
-                     .bus_o(read_addr_2));
-    regfile   rf(.clk_i(clk_i),
+                     .bus_o(read_addr_2));      
+    regfile   rg(.clk_i(clk_i),
                  .write_enable_i(reg_write_i), 
                  .read_addr_1_i(read_addr_1),
                  .read_addr_2_i(read_addr_2),
@@ -74,8 +74,12 @@ module datapath
                       .bus_o(result));
     extend    ext   (.instr_i(instr_i[23:0]),
                      .imm_src_i(imm_src_i),
-                     .imm_o(imm));
-    // ALU logic       
+                     .imm_ext_o(ext_imm));
+    // ALU logic
+    mux2 #(32) alumux(.bus_a_i(write_data_o),
+                      .bus_b_i(ext_imm),
+                      .select_i(alu_src_i),
+                      .bus_o(src_b));
     alu  #(32) alu_f(.bus_a_i(src_a),
                      .bus_b_i(src_b),
                      .control_i(alu_control_i),

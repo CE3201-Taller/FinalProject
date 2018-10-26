@@ -8,11 +8,11 @@
  *        Digital design and computer architecture. Elsevier. 2012.
  */
 
-module mux2 #(BITS = 3)
+module mux2 #(WIDTH = 8)
 (
-	 input logic[BITS-1:0] bus_a_i, bus_b_i,
-	 input logic select_i,
-	output logic[BITS-1:0] bus_o
+     input logic[WIDTH-1:0] bus_a_i, bus_b_i,
+     input logic            select_i,
+    output logic[WIDTH-1:0] bus_o
 );
-	assign bus_o = select_i ? bus_b_i : bus_a_i;
+    assign bus_o = select_i ? bus_b_i : bus_a_i;
 endmodule

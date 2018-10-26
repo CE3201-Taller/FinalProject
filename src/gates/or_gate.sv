@@ -8,10 +8,10 @@
  *        Digital design and computer architecture. Elsevier. 2012.
  */
 
-module or_gate #(parameter BITS = 4) 
+module or_gate #(parameter WIDTH = 4) 
 (
-     input logic[BITS-1:0] bus_a_i, bus_b_i,
-    output logic[BITS-1:0] bus_o
+     input logic[WIDTH-1:0] bus_a_i, bus_b_i,
+    output logic[WIDTH-1:0] bus_o
 );
     assign bus_o = bus_a_i | bus_b_i;
 endmodule

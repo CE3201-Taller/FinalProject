@@ -8,11 +8,11 @@
  *        Digital design and computer architecture. Elsevier. 2012.
  */
 
-module shift_left_gate #(BITS = 3)
+module shift_left_gate #(WIDTH = 3)
 (
-     input logic[BITS-1:0] bus_i,
-     input logic[BITS-1:0] shift_i,
-    output logic[BITS-1:0] bus_o
+     input logic[WIDTH-1:0] bus_i,
+     input logic[WIDTH-1:0] shift_i,
+    output logic[WIDTH-1:0] bus_o
 );
     assign bus_o = bus_i << shift_i;
 endmodule
