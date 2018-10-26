@@ -1,0 +1,19 @@
+mov R6, #0
+ldr R0, [R6] 	;leer Execute 
+cbnz R0, 5  	;branch al linea 5 (cargar operadores) si Execute = 1
+b 1 			;while true
+mov R6, #1
+ldr R1, [R6] 	;cargar MemDat pos 1(Operando A) en R1
+mov R6, #2
+ldr R2, [R6]	;cargar MemDat pos 2(Operando B) en R2
+mov R6, #3
+ldr R3, [R6]	;cargar MemDat pos 3(Operacion) en R3
+cbnz R3, 14		;branch a linea 14 si R3=0 (si operacion=1, es decir resta)
+add R5, R1, R2	;R5=(A+B)
+b 16			;branch	a linea 16 (almacenar resultado)
+sub R5, R1, R2	;R5=(A-B)
+mov R6, #5
+str R5, [#5]	;almacenar R5 en MemDat pos 5
+b 1				;while true
+
+
