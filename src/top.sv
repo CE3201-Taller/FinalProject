@@ -6,26 +6,36 @@
  *        Digital design and computer architecture. Elsevier. 2012.
  */
  
- module top 
+ module top
  (
      input logic        clk_i, rst_i,
-    output logic [31:0] write_data_o, data_addr_o,
-    output logic        mem_write_o
+     input logic [8:0]  data_i,
+     input logic        mode_i,
+     input logic        funct_1_i, funct_2_i, exec_i,
+    output logic [6:0]  display_1_o, display_2_o, display_3_o
 );
+    logic [31:0] w1_data, w2_data, addr_1, addr_2;
     logic [31:0] pc, instr, read_data;
+    logic        w1_ena, w2_ena;
+    
     processor arm(.clk_i(clk_i), 
                   .rst_i(rst_i), 
                   .pc_o(pc), 
                   .instr_i(instr), 
-                  .mem_write_o(mem_write_o),
-                  .alu_result_o(data_addr_o), 
-                  .write_data_o(write_data_o), 
+                  .mem_write_o(w1_ena),
+                  .alu_result_o(addr_1), 
+                  .write_data_o(w1_data), 
                   .read_data_i(read_data));
+
     instruction_memory imem(.a_i(pc), 
                             .read_data_o(instr));
+                            
     data_memory dmem(.clk_i(clk_i),
-                     .write_ena_i(mem_write_o),
-                     .a_i(data_addr_o),
-                     .write_data_i(write_data_o),
+                     .w1_ena_i(w1_ena),
+                     .w2_ena_i(w2_ena),
+                     .addr_1_i(addr_1),
+                     .addr_2_i(addr_2),
+                     .w1_data_i(w1_data),
+                     .w2_data_i(w2_data),
                      .read_data_o(read_data));
 endmodule

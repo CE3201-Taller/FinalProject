@@ -19,21 +19,21 @@ module cond_check
     assign ge_flag = (neg_flag == overflow_flag);
     always_comb
         case(cond_i)
-            4'b0000: cond_o =    zero_flag;
-            4'b0001: cond_o = ~  zero_flag;
-            4'b0010: cond_o =    carry_flag;
-            4'b0011: cond_o = ~  carry_flag;
-            4'b0100: cond_o =    neg_flag;
-            4'b0101: cond_o = ~  neg_flag;
-            4'b0110: cond_o =    overflow_flag;
-            4'b0111: cond_o = ~  overflow_flag;
-            4'b1000: cond_o =    carry_flag & ~zero_flag;
-            4'b1001: cond_o = ~ (carry_flag & ~zero_flag);
-            4'b1010: cond_o =    ge_flag;
-            4'b1011: cond_o = ~  ge_flag;
-            4'b1100: cond_o =    ~zero_flag & ge_flag;
-            4'b1101: cond_o = ~ (~zero_flag & ge_flag);
-            4'b1110: cond_o =    1'b1;
-            default: cond_o =    1'bx;
+            4'b0000: cond_o =   zero_flag;
+            4'b0001: cond_o = ~ zero_flag;
+            4'b0010: cond_o =   carry_flag;
+            4'b0011: cond_o = ~ carry_flag;
+            4'b0100: cond_o =   neg_flag;
+            4'b0101: cond_o = ~ neg_flag;
+            4'b0110: cond_o =   overflow_flag;
+            4'b0111: cond_o = ~ overflow_flag;
+            4'b1000: cond_o =   carry_flag & ~zero_flag;
+            4'b1001: cond_o = ~(carry_flag & ~zero_flag);
+            4'b1010: cond_o =   ge_flag;
+            4'b1011: cond_o = ~ ge_flag;
+            4'b1100: cond_o =   ~zero_flag & ge_flag;
+            4'b1101: cond_o = ~(~zero_flag & ge_flag);
+            4'b1110: cond_o =   1'b1;
+            default: cond_o =   1'bx;
         endcase
 endmodule

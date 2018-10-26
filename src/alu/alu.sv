@@ -16,16 +16,16 @@ module alu #(parameter WIDTH = 3)
     output logic [3:0]       flags_o
 );
     logic[WIDTH-1:0] addr_l, and_l, orr_l;
-    logic flag_z, flag_v, flag_n, flag_c;
+    logic flag_z, flag_v, flag_n, flag_c, carry_o;
     adder_substractor #(WIDTH) adder_sub(.bus_a_i(bus_a_i), 
                                          .bus_b_i(bus_b_i), 
                                          .select_i(control_i[0]), 
                                          .bus_o(addr_l), 
-                                         .flag_v_o(flag_v));
+                                         .carry_o(carry_o));
     and_gate #(WIDTH) and_op(bus_a_i,
                              bus_b_i,
                              and_l);
-     or_gate #(WIDTH)  or_op(bus_a_i,
+    or_gate #(WIDTH)  or_op(bus_a_i,
                              bus_b_i,
                              orr_l);
     mux_four #(WIDTH) opSelector(.bus_a_i(addr_l), 
@@ -36,11 +36,14 @@ module alu #(parameter WIDTH = 3)
                                  .bus_o(bus_s_o));
     always_comb begin
         flag_z   = & (~bus_s_o);
-        flag_c   = 1'b0;
-        flag_n   = bus_s_o[31]; 
-        flags_o[0] = flag_z;
-        flags_o[1] = flag_v;
-        flags_o[2] = flag_n;
-        flags_o[3] = flag_c;
+        flag_c   = ~ control_i[1] & carry_o;
+        flag_n   =   bus_s_o[WIDTH-1];
+        flag_v   = ~ control_i[1] & 
+                    (bus_a_i[WIDTH-1] | addr_l[WIDTH-1]) & 
+                   ~(control_i[0] ^ bus_a_i[WIDTH-1] ^ bus_b_i[WIDTH-1]);
+        flags_o[0] = flag_v;
+        flags_o[1] = flag_c;
+        flags_o[2] = flag_z;
+        flags_o[3] = flag_n;
     end
 endmodule

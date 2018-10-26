@@ -13,7 +13,7 @@ module adder_substractor #(parameter WIDTH = 3)
      input logic [WIDTH-1:0] bus_a_i, bus_b_i,
      input logic             select_i,
     output logic [WIDTH-1:0] bus_o,
-    output logic             flag_v_o
+    output logic             carry_o
 );
     
     logic[WIDTH-1:0] bus_tmp, selected;
@@ -30,5 +30,5 @@ module adder_substractor #(parameter WIDTH = 3)
                           .bus_b_i(bus_tmp),
                           .carry_i(select_i),
                           .bus_o(bus_o),
-                          .flag_v_o(flag_v_o));
+                          .carry_o(carry_o));
 endmodule
