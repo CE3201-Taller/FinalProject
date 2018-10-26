@@ -12,3 +12,4 @@
 !*/src
 !*/testbench
 !*.sv
+!simulation/modelsim/memfile.dat

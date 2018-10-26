@@ -1,5 +1,6 @@
 /* 
  * @file  top.sv
+ * @autor Arturo Mora
  * @autor Victor Montero
  * @date  14/10/2018
  * @src   Based on code found in Harris, D., & Harris, S. 

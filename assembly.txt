@@ -1,5 +1,5 @@
 sub R8, R15,R15	;R8=0 
-ldr R0, [R6] 	;leer Execute de MemDat pos 0 
+ldr R0, [R8] 	;leer Execute de MemDat pos 0 
 subs R9, R0,#1	;comprobar R0-1=0
 beq 0X14  		;branch a 0x14 (cargar operadores) si Execute = 1
 b 0x00 			;while true, volver al inicio de instrucciones
