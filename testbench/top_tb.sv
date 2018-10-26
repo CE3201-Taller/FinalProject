@@ -16,14 +16,13 @@ module top_tb();
     
     top dut(.clk_i(clk),
             .rst_i(rst),
-            .data_addr_o(data_adr),
             .write_data_o(write_data),
+            .data_addr_o(data_adr),
             .mem_write_o(mem_write));
             
     initial begin
-        #0 clk  <= 0;
         #0 rst  <= 1;
-        #10 rst <= 0;
+        #22 rst <= 0;
     end
     always begin
         #5 clk <= 1;
@@ -36,7 +35,6 @@ module top_tb();
             end
             else if (data_adr !== 96) begin
                 $display("Simulation failed");
-                $fatal;
             end
         end
     end

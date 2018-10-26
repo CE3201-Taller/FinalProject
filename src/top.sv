@@ -21,7 +21,6 @@
                   .alu_result_o(data_addr_o), 
                   .write_data_o(write_data_o), 
                   .read_data_i(read_data));
-    
     instruction_memory imem(.a_i(pc), 
                             .read_data_o(instr));
     data_memory dmem(.clk_i(clk_i),

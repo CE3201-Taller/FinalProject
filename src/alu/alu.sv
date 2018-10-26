@@ -15,7 +15,7 @@ module alu #(parameter WIDTH = 3)
     output logic [WIDTH-1:0] bus_s_o,
     output logic [3:0]       flags_o
 );
-    logic[WIDTH-1:0] addr_l, and_l, or_l;
+    logic[WIDTH-1:0] addr_l, and_l, orr_l;
     logic flag_o, flag_v, flag_n, flag_c;
     adder_substractor #(WIDTH) adder_sub(.bus_a_i(bus_a_i), 
                                          .bus_b_i(bus_b_i), 

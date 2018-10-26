@@ -24,12 +24,12 @@ module decoder
     // Main Decoder
     always_comb
         casex(op_i)
-            2'b00: if(funct_i[5]) controls = 10'b0000101001;
-                   else           controls = 10'b0000001001;
-            2'b01: if(funct_i[0]) controls = 10'b0001111000;
-                   else           controls = 10'b1001110100;
-            2'b10:                controls = 10'b0110100010;
-            default:              controls = 10'bx;
+            2'b00: if(funct_i[5]) controls = 10'b0000101001; // data processing immediate
+                   else           controls = 10'b0000001001; // data processing register
+            2'b01: if(funct_i[0]) controls = 10'b0001111000; // ldr
+                   else           controls = 10'b1001110100; // str
+            2'b10:                controls = 10'b0110100010; // b
+            default:              controls = 10'bx;          // unimplemented
     endcase
 
     assign {reg_src_o, imm_src_o, alu_src_o, mem_to_reg_o, 

@@ -23,5 +23,5 @@ module adder #(parameter WIDTH = 3)
         for (i = 0; i < WIDTH; i = i+1) begin:forloop
             one_bit_full_adder addrr(bus_a_i[i], bus_b_i[i], carry_o[i], bus_o[i], carry_o[i+1]);
         end
-    endgenerate	
+    endgenerate
 endmodule
