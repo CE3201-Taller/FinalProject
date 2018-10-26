@@ -38,4 +38,10 @@
                      .w1_data_i(w1_data),
                      .w2_data_i(w2_data),
                      .read_data_o(read_data));
+	
+	display_decoder dd(.data_i(read_data[7:0]),
+							 .display_1_o(display_1_o),
+							 .display_2_o(display_2_o),
+							 .display_3_o(display_3_o));
+	
 endmodule
