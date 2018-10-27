@@ -16,6 +16,6 @@ module counter #(parameter N = 8)
 );
     always_ff @(posedge clk_i, posedge rst_i)
              if(rst_i) q_o <= 0;
-        else if(ena_i) q_o <= q_o + 1;
+        else if(ena_i) q_o <= q_o + 1'b1;
 
 endmodule
